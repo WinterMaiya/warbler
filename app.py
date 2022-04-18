@@ -227,7 +227,7 @@ def profile():
             g.user.image_url = form.image_url.data
             g.user.header_image_url = form.image_header_url.data
             g.user.bio = form.bio.data
-            g.user.location = form.location.data
+            g.location = form.location.data
             db.session.commit()
 
         else:
@@ -316,7 +316,13 @@ def homepage():
     """
 
     if g.user:
-        messages = Message.query.order_by(Message.timestamp.desc()).limit(100).all()
+        following_ids = [f.id for f in g.user.following] + [g.user.id]
+        messages = (
+            Message.query.filter(Message.user_id.in_(following_ids))
+            .order_by(Message.timestamp.desc())
+            .limit(100)
+            .all()
+        )
 
         return render_template("home.html", messages=messages)
 
