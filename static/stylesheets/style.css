@@ -104,8 +104,8 @@ nav form.navbar-form {
 }
 
 /* on "onboarding" pages (signup & login), the navbar is
-   different: no search box, the logo is centered, and it has
-   a background color.
+  different: no search box, the logo is centered, and it has
+  a background color.
  */
 
 .onboarding > .navbar {
